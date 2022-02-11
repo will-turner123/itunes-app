@@ -96,7 +96,7 @@ export default function Login() {
                                     </Button>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Typography variant="p">Don't have an account? 
+                                    <Typography variant="p">{"Dont have an account?"} 
                                         <Link href="/register" passHref>
                                             <Typography variant="p" element="span" color="primary"> Create an account</Typography>
                                         </Link>

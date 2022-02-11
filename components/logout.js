@@ -8,7 +8,7 @@ export default function LogOut(){
     signOut(auth).then(() => {
         router.push('/login')
     }).catch((error) => {
-        <h1 class="text-danger">Failed to log you out</h1>
+        <h1>Failed to log you out</h1>
         console.log(error);
     })
     
