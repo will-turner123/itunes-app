@@ -36,7 +36,7 @@ export default function Album({albumId}){
 
         function addSongs(artist, album){
             return new Promise((fulfill) => {
-                // is there no reason i can't name a album and make it like 10x more readable?
+                // consider renaming a to album for readability
                 const albums = artist.albums;
                 albums.forEach((a, index) => {
                     if(String(a.collectionId) === albumId){
