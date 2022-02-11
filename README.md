@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Creatively Named iTunes App
 
-## Getting Started
+## Features:
+* Light / Dark mode
+* Works offline using [next-pwa](https://github.com/shadowwalker/next-pwa)
+* Search the iTunes api for music and artists, with the ability to "like" songs
+* View liked songs in your library
+* View artists and their discography
+* View a chart of your top genres and top artists
+* Firebase authentication and cloud storing of user likes
 
-First, run the development server:
+This project was my first time using Material UI and Next.js, both of which quickly grew on me. I definitely plan on using these technologies in future projects! I really liked Next.js's paging system. While I didn't get the opportunity to use them here, I would have loved to have used other Next features, many of which would suit the project.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Material UI was also really fun to use! With their theming system, I was able to make a light/dark mode with just a couple lines of code
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
+![Dark mode](https://github.com/will-turner123/itunes-app/blob/main/repo-images/darkmode.gif?raw=true)
+Ease your eyes with dark mode!
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![Your taste](https://github.com/will-turner123/itunes-app/blob/main/repo-images/taste.png?raw=true)
+View your music taste
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![Search results](https://github.com/will-turner123/itunes-app/blob/main/repo-images/search.png?raw=true)
+Search results. Clicking the name of the song will take you to the album page, clicking the artist will take you to the artist's page
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![offline mode](https://github.com/will-turner123/itunes-app/blob/main/repo-images/offlineapp.gif?raw=true)
+What I think is probably the coolest part about the app is the fact it still works while the user does not have an internet connection, relying on cached data. 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Improvements
+* Better front-end styling (especially on the login and register page). More interactivity, such as hover effects on cards
+* A better solution for storing data. Currently, we store every artist and their discography under local storage. There are a couple reasons for this:
+* * iTunes API does not provide the artists profile picture, so we make a request to their iTunes artist page and extract it from the HTML response.
+* * Keeps the amount of requests down for improved performance
+* * iTunes API has a rate limit of 20 requests per minute which we want to avoid hitting (although there are potential ways to work around this!)
+* * Storing a user's liked songs locally is really helpful for our offline data handling. If the user likes or unlikes a song without internet connection, the next successful request to firebase will include all their offline changes.
+* This solution does have a few problems, though:
+* * If a user views a ton of artists or albums, local storage would become really bloated and take up excessive space on the user's machine.
+* * We aren't able to see the newest data on an artist. If they release a new song or album after the user has saved their data to local storage, they wouldn't be able to find it unless they specifically search for it. This could perhaps be worked around by having a timestamp of when the artist's page was last stored and deleting it if x time has passed
+* Error handling. The iTunes API will sometimes have missing data. For example, an album will have an artistId yet when you look up the artist by this id there are no results found
+* Better responsiveness, especially on the datagrids songs are displayed in. Getting them to look good on smaller screen sizes is a challenge
